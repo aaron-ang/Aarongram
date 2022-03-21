@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Aarongram</string>
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <string name="back4app_app_id">lwfC5eSLijolZQFLjE1KLEGwMADL9Sl5s8g6Okn9</string>
+    <string name="back4app_client_key">BlZ7xq4K9a2QhE19BliNCMf4KdFiKiZdTQcyiZ8m</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign up</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="submit">Submit</string>
+</resources>
