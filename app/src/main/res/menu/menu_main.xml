@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:icon="@drawable/ic_post_options"
+        android:title="@string/post"
+        app:showAsAction="always" />
+
+    <item
+        android:icon="@drawable/ic_heart"
+        android:title="@string/activity"
+        app:showAsAction="always" />
+
+    <item
+        android:icon="@drawable/ic_direct"
+        android:title="@string/messages"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/logout_option"
+        android:title="@string/log_out" />
+</menu>

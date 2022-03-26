@@ -1,12 +1,16 @@
-package com.example.aarongram
+package com.example.aarongram.activities
 
+import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.aarongram.R
 import com.parse.ParseUser
 
 class LoginActivity : AppCompatActivity() {
@@ -55,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
             username, password, ({ user, e ->
                 if (user != null) {
                     Log.i(TAG, "Successfully logged in user")
+                    goToMainActivity()
                 } else {
                     e.printStackTrace()
                     Toast.makeText(this, "Error logging in", Toast.LENGTH_SHORT).show()
@@ -66,7 +71,6 @@ class LoginActivity : AppCompatActivity() {
     private fun goToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-
         // Close loginActivity
         finish()
     }

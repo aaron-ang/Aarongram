@@ -3,8 +3,13 @@
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
     <string name="back4app_app_id">lwfC5eSLijolZQFLjE1KLEGwMADL9Sl5s8g6Okn9</string>
     <string name="back4app_client_key">BlZ7xq4K9a2QhE19BliNCMf4KdFiKiZdTQcyiZ8m</string>
-    <string name="login">Login</string>
-    <string name="signup">Sign up</string>
+    <string name="login">Log in</string>
+    <string name="signup">Sign up.</string>
     <string name="take_picture">Take Picture</string>
     <string name="submit">Submit</string>
+    <string name="login_signup_text">Don\'t have an account?</string>
+    <string name="post">Post</string>
+    <string name="activity">Activity</string>
+    <string name="messages">Messages</string>
+    <string name="log_out">Log out</string>
 </resources>

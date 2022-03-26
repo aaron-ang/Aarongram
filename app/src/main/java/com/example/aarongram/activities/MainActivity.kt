@@ -1,22 +1,27 @@
-package com.example.aarongram
+package com.example.aarongram.activities
 
+import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.FileProvider
+import com.example.aarongram.Post
+import com.example.aarongram.R
 import com.parse.ParseFile
 import com.parse.ParseQuery
 import com.parse.ParseUser
-import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileOutputStream
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +32,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+        setSupportActionBar(toolbar)
+        toolbar.setTitleTextAppearance(this, R.style.grandHotelTextAppearance)
 
         findViewById<Button>(R.id.btnTakePicture).setOnClickListener {
             // Launch camera to let user take picture
@@ -37,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             // Send post to server
             val description = findViewById<EditText>(R.id.description).text.toString()
             val user = ParseUser.getCurrentUser()
+            hideKeyboard(findViewById(R.id.mainView))
             if (photoFile != null) {
                 submitPost(description, user, photoFile!!)
             } else {
@@ -48,11 +57,39 @@ class MainActivity : AppCompatActivity() {
         queryPosts()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout_option -> logoutUser()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun hideKeyboard(v: View) {
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(v.applicationWindowToken, 0)
+    }
+
+    private fun logoutUser() {
+        ParseUser.logOut()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     private fun submitPost(description: String, user: ParseUser, file: File) {
         if (description == "") {
             Toast.makeText(this, "Please enter a description", Toast.LENGTH_SHORT).show()
             return
         }
+
+        val pb = findViewById<View>(R.id.pbLoading) as ProgressBar
+        pb.visibility = ProgressBar.VISIBLE
+
         val post = Post()
         post.setDescription(description)
         post.setUser(user)
@@ -67,6 +104,7 @@ class MainActivity : AppCompatActivity() {
                 findViewById<EditText>(R.id.description).text = null
                 findViewById<ImageView>(R.id.imageView).setImageResource(android.R.color.transparent)
                 Toast.makeText(this, "Post successful", Toast.LENGTH_SHORT).show()
+                pb.visibility = ProgressBar.INVISIBLE
             }
         }
     }
