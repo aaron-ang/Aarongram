@@ -3,11 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:icon="@drawable/ic_post_options"
-        android:title="@string/post"
-        app:showAsAction="always" />
-
-    <item
         android:icon="@drawable/ic_heart"
         android:title="@string/activity"
         app:showAsAction="always" />
