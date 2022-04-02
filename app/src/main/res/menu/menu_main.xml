@@ -5,11 +5,12 @@
     <item
         android:icon="@drawable/ic_heart"
         android:title="@string/activity"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
-        android:icon="@drawable/ic_direct"
+        android:icon="@drawable/ic_facebook_messenger"
         android:title="@string/messages"
+        android:iconTint="@color/cardview_dark_background"
         app:showAsAction="always" />
 
     <item

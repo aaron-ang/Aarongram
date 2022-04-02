@@ -9,6 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
+// TODO Create new ImageAdapter class to bind image only
+// TODO Create new item_image xml and set width = height = parent / 3 and inflate it
+
 class PostAdapter(private val context: Context, private val posts: MutableList<Post>) :
     RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
@@ -35,10 +38,14 @@ class PostAdapter(private val context: Context, private val posts: MutableList<P
         private val tvUsername: TextView = itemView.findViewById(R.id.tvUserName)
         private val ivImage: ImageView = itemView.findViewById(R.id.ivImage)
         private val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
+        private val tvDescUsername: TextView = itemView.findViewById(R.id.tvUserName2)
+        private val tvPostTime: TextView = itemView.findViewById(R.id.tvPostTime)
 
         fun bind(post: Post) {
             tvUsername.text = post.getUser()?.username
+            tvDescUsername.text = tvUsername.text.toString()
             tvDescription.text = post.getDescription()
+            "${TimeFormatter.getTimeDifference(post.createdAt.toString())} ago".also { tvPostTime.text = it }
             Glide.with(itemView.context).load(post.getImage()?.url).into(ivImage)
         }
     }

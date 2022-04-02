@@ -1,23 +1,21 @@
 package com.example.aarongram.activities
 
+import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.aarongram.Post
 import com.example.aarongram.R
 import com.example.aarongram.fragments.ComposeFragment
 import com.example.aarongram.fragments.FeedFragment
 import com.example.aarongram.fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.parse.ParseQuery
 import com.parse.ParseUser
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
         toolbar.setTitleTextAppearance(this, R.style.grandHotelTextAppearance)
+        if (isLightTheme(this)) {
+            toolbar.setBackgroundColor(resources.getColor(R.color.white))
+        }
 
         val fragmentManager: FragmentManager = supportFragmentManager
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -69,6 +70,11 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun isLightTheme(activity: Activity): Boolean {
+        return activity.resources.configuration.uiMode and
+                Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_NO
     }
 
     companion object {
