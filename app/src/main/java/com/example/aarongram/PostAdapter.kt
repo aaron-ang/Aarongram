@@ -45,7 +45,9 @@ class PostAdapter(private val context: Context, private val posts: MutableList<P
             tvUsername.text = post.getUser()?.username
             tvDescUsername.text = tvUsername.text.toString()
             tvDescription.text = post.getDescription()
-            "${TimeFormatter.getTimeDifference(post.createdAt.toString())} ago".also { tvPostTime.text = it }
+            "${TimeFormatter.getTimeDifference(post.createdAt.toString())} ago".also {
+                tvPostTime.text = it
+            }
             Glide.with(itemView.context).load(post.getImage()?.url).into(ivImage)
         }
     }

@@ -8,15 +8,14 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import com.example.aarongram.Post
 import com.example.aarongram.R
 import com.example.aarongram.activities.MainActivity
@@ -75,7 +74,11 @@ class ComposeFragment : Fragment() {
         // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
         if (photoFile != null) {
             val fileProvider: Uri =
-                FileProvider.getUriForFile(requireContext(), "com.codepath.fileprovider", photoFile!!)
+                FileProvider.getUriForFile(
+                    requireContext(),
+                    "com.codepath.fileprovider",
+                    photoFile!!
+                )
             intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
 
             // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
@@ -89,7 +92,8 @@ class ComposeFragment : Fragment() {
 
     private fun submitPost(description: String, user: ParseUser, file: File) {
         if (description == "") {
-            Toast.makeText(requireContext(), "Please enter a description", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please enter a description", Toast.LENGTH_SHORT)
+                .show()
             return
         }
 
@@ -107,7 +111,8 @@ class ComposeFragment : Fragment() {
             } else {
                 Log.i(MainActivity.TAG, "Successfully saved post")
                 requireView().findViewById<EditText>(R.id.description).text = null
-                requireView().findViewById<ImageView>(R.id.imageView).setImageResource(android.R.color.transparent)
+                requireView().findViewById<ImageView>(R.id.imageView)
+                    .setImageResource(android.R.color.transparent)
                 Toast.makeText(requireContext(), "Post successful", Toast.LENGTH_SHORT).show()
                 pb.visibility = ProgressBar.INVISIBLE
             }
@@ -146,7 +151,10 @@ class ComposeFragment : Fragment() {
         // Use `getExternalFilesDir` on Context to access package-specific directories.
         // This way, we don't need to request external read/write runtime permissions.
         val mediaStorageDir =
-            File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES), MainActivity.TAG)
+            File(
+                requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                MainActivity.TAG
+            )
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {

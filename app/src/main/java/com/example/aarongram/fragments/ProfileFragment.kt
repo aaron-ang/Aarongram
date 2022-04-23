@@ -1,18 +1,7 @@
 package com.example.aarongram.fragments
 
-import android.app.Activity
-import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.aarongram.Post
-import com.example.aarongram.PostAdapter
-import com.example.aarongram.R
 import com.parse.ParseQuery
 import com.parse.ParseUser
 
